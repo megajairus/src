@@ -136,7 +136,6 @@ public class WriteXMLFile {
 	}
 	
 	private static Node assignBehaviour(String name, ArrayList<BehaviourElement> component_behaviour, Document doc) {
-		System.out.println(name);
 		for(int i = 0; i < component_behaviour.size(); i++){
 			if (component_behaviour.get(i).getOwner().equals(name)){
 				Node node = doc.importNode(component_behaviour.get(i).getElement(), true);

@@ -29,7 +29,6 @@ public class StateMachineExtractor {
 			for(int i =0; i < machines.getLength(); i++){
 				Element e_machine = (Element) machines.item(i);
 				if(structure.componentExists(e_machine.getAttribute("name"))){
-					System.out.println(e_machine.getAttribute("name"));
 					DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 					DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 					Document doc = docBuilder.newDocument();
@@ -234,7 +233,6 @@ public class StateMachineExtractor {
 	private static Element getNextAction(NodeList transitions, Element currant_state) {
 		for(int i =0; i < transitions.getLength(); i++){
 			Element line = (Element) transitions.item(i);
-			System.out.println(currant_state.getAttribute(XMI_ID));
 			if(line.getAttribute(SOURCE).equals(currant_state.getAttribute(XMI_ID))){
 				if (!line.getAttribute("name").equals("then") &&  !line.getAttribute("name").equals("else")){
 					return line;

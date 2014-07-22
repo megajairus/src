@@ -26,8 +26,7 @@ public class ModelAnalyser {
 		ArrayList<Document> docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_CLASS_DIAGRAM);
 		StructureExtractor.loadDateFields(docs, structure);
 		StructurePerfecter.finishStructureData(structure);
-		//docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_SEQUENCE_DIAGRAM);
-		//SequenceExtractor.loadBehaviours(docs, structure);
+		StructureValidation.validateStructureNotation(structure);
 		docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_STATE_MACHINE_DIAGRAM);
 		StateMachineExtractor.loadBehaviours(docs, structure, component_behaviour);
 		WriteXMLFile.createIntermediateLanguage(structure, component_behaviour);

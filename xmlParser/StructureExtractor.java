@@ -140,7 +140,9 @@ public class StructureExtractor {
 		String client_id = connect.getAttribute("client");
 		String supplier_id = connect.getAttribute("supplier");
 		String[] channel_array = name.split(":");
-		Connection new_connection = new Connection(channel_array[1], channel_array[0], supplier_id, client_id);
+		String out_channel = channel_array[0].replaceAll(" ",  "");
+		String in_channel = channel_array[1].replaceAll(" ",  "");
+		Connection new_connection = new Connection(in_channel, out_channel, supplier_id, client_id);
 		return new_connection;
 		
 	}

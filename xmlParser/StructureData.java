@@ -76,6 +76,9 @@ public class StructureData {
 	public Connection getConnections(int index){
 		return connection_list.get(index);
 	}
+	public ArrayList<Connection> getConnectionList(){
+		return connection_list;
+	}
 	public int instanceSize(){
 		return instance_list.size();
 	}
@@ -95,6 +98,15 @@ public class StructureData {
 	public Boolean componentExists(String name){
 		for (int i =0 ; i < component_list.size(); i++){
 			if(name.equals(component_list.get(i).getName())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Boolean instanceExists(String name){
+		for (int i =0 ; i < instance_list.size(); i++){
+			if(name.equals(instance_list.get(i).getInstanceName())){
 				return true;
 			}
 		}
