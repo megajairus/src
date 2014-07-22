@@ -9,12 +9,12 @@ import structuralModels.Interface;
 import structuralModels.Struct;
 
 public class StructurePerfecter {
-	public static StructureData finishStructureData(StructureData structure){
+	public static void finishStructureData(StructureData structure){
 		fillVariableTypes(structure);
 		linkComponentPresents(structure);
 		setConnections(structure);
 		setComponenInstances(structure);
-		return structure;
+		//return structure;
 	}
 
 	private static void setComponenInstances(StructureData structure) {

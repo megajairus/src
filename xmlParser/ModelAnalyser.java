@@ -21,10 +21,14 @@ public class ModelAnalyser {
 	}
 	
 	public static void main(String argv[]) throws ParserConfigurationException{
-		
+		boolean model_excepted;
 		File folder = OpenFolder.pickFolderPath();
 		ArrayList<Document> docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_CLASS_DIAGRAM);
-		StructureExtractor.loadDateFields(docs, structure);
+		model_excepted = StructureExtractor.loadDateFields(docs, structure);
+		if (!model_excepted){
+			ErrorMessages.cannotContinue();
+			return;
+		}
 		StructurePerfecter.finishStructureData(structure);
 		StructureValidation.validateStructureNotation(structure);
 		docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_STATE_MACHINE_DIAGRAM);

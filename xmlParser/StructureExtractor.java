@@ -43,7 +43,8 @@ public class StructureExtractor {
 	private static final String XMI_TYPE = "xmi:type";
 	private static final String PACKAGED_ELEMENT = "packagedElement";
 	
-	public static StructureData loadDateFields(ArrayList<org.w3c.dom.Document>  docs, StructureData structure){
+	public static boolean loadDateFields(ArrayList<org.w3c.dom.Document>  docs, StructureData structure){
+		boolean exceptable = true;
 		for(int documentIndex = 0; documentIndex < docs.size(); documentIndex++){
 		NodeList node_list = docs.get(documentIndex).getElementsByTagName(PACKAGED_ELEMENT);
 		for (int i = 0; i < node_list.getLength(); i++) {
@@ -58,10 +59,20 @@ public class StructureExtractor {
 						structure.addComponent(parseComponent(eElement));
 					}
 				if (eElement.getAttribute(XMI_TYPE).equals(UML_INTERFACE)){
+					if(interfaceNotationAccepted(eElement)){
 						structure.addInterface(parseInterface(eElement));
+					}
+					else{
+						exceptable = false;
+					}
 				}
 				if (eElement.getAttribute(XMI_TYPE).equals(UML_CONNECTION)){
-					structure.addConnection(parseConnection(eElement));
+					if(coonectionNotationAccepted(eElement)){
+						structure.addConnection(parseConnection(eElement));
+					}
+					else{
+						exceptable=  false;
+					}
 				}
 				if (eElement.getAttribute(XMI_TYPE).equals(UML_CLASS)){
 					structure.addStruct(parseStruct(eElement));
@@ -75,7 +86,31 @@ public class StructureExtractor {
 			}
 		}
 		}
-		return structure;
+		return exceptable;
+	}
+
+
+	private static boolean coonectionNotationAccepted(Element eElement) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	private static boolean interfaceNotationAccepted(Element inter) {
+		boolean acceptable = true;
+		String inter_name = inter.getAttribute("name");
+		NodeList attributes = inter.getElementsByTagName(ATTRIBUTE);
+		for (int i = 0; i < attributes.getLength(); i++) {
+			Node node = attributes.item(i);
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				Element element = (Element) node;
+				Variable variable = parsePropertyType(element);
+				if (!StructureValidation.channelNameNotation(variable.getName(), inter_name)){
+					acceptable = false;
+				}
+			}
+		}
+		return acceptable;
 	}
 
 
