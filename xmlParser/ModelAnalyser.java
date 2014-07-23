@@ -30,9 +30,22 @@ public class ModelAnalyser {
 			return;
 		}
 		StructurePerfecter.finishStructureData(structure);
-		StructureValidation.validateStructureNotation(structure);
+		model_excepted = StructureValidation.validateStructureNotation(structure);
+		if (!model_excepted){
+			ErrorMessages.cannotContinue();
+			return;
+		}
 		docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_STATE_MACHINE_DIAGRAM);
-		StateMachineExtractor.loadBehaviours(docs, structure, component_behaviour);
+		model_excepted = StateMachineExtractor.loadBehaviours(docs, structure, component_behaviour);
+		if (!model_excepted){
+			ErrorMessages.cannotContinue();
+			return;
+		}
+		model_excepted = StateMachineValidation.checkReceiveSendChannels(structure, component_behaviour);
+		if (!model_excepted){
+			ErrorMessages.cannotContinue();
+			return;
+		}
 		WriteXMLFile.createIntermediateLanguage(structure, component_behaviour);
 		System.out.println("----------------------------");
 	}

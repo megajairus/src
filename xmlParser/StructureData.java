@@ -95,7 +95,7 @@ public class StructureData {
 		return connection_list.size();
 	}
 	
-	public Boolean componentExists(String name){
+	public boolean componentExists(String name){
 		for (int i =0 ; i < component_list.size(); i++){
 			if(name.equals(component_list.get(i).getName())){
 				return true;
@@ -104,9 +104,25 @@ public class StructureData {
 		return false;
 	}
 	
-	public Boolean instanceExists(String name){
+	public boolean instanceExistsByName(String name){
 		for (int i =0 ; i < instance_list.size(); i++){
 			if(name.equals(instance_list.get(i).getInstanceName())){
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean instanceExistsById(String id){
+		for (int i =0 ; i < instance_list.size(); i++){
+			if(id.equals(instance_list.get(i).getInstanceId())){
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean associateExistsById(String id){
+		for (int i =0 ; i < associate_list.size(); i++){
+			if(id.equals(associate_list.get(i).getId())){
 				return true;
 			}
 		}

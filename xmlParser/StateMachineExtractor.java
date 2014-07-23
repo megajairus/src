@@ -22,8 +22,10 @@ public class StateMachineExtractor {
 	private static final String PACKAGED_ELEMENT = "packagedElement";
 	private static final String TRANSITION = "transition";
 	private static final String SUBVERTEX = "subvertex";
+	private static  boolean exceptable;
 
-	public static void loadBehaviours(ArrayList<Document> docs, StructureData structure, ArrayList<BehaviourElement> component_behaviour) throws ParserConfigurationException {
+	public static boolean loadBehaviours(ArrayList<Document> docs, StructureData structure, ArrayList<BehaviourElement> component_behaviour) throws ParserConfigurationException {
+		setExceptable(true);
 		for(int documentIndex = 0; documentIndex < docs.size(); documentIndex++){
 			NodeList machines = docs.get(documentIndex).getElementsByTagName(PACKAGED_ELEMENT);
 			for(int i =0; i < machines.getLength(); i++){
@@ -39,18 +41,17 @@ public class StateMachineExtractor {
 					Element next_action = getNextAction(transitions, start_state);
 					Element next_state = getNextState(states, next_action);
 					if (next_state == null || next_action == null){
-						return;
+						return getExceptable();
 					}
-					
 					new_element = (trackBehaviours(states, transitions, next_state, next_action, new_element, doc));
 					component_behaviour.add(new BehaviourElement(new_element, e_machine.getAttribute("name")));
 				}
-			}	
+			}
 		}
+		return getExceptable();
 	}
 
 	private static Element trackBehaviours(NodeList states, NodeList transitions, Element state, Element action,Element parent,  Document doc) {
-	
 		while(!state.getAttribute(XMI_TYPE).equals("uml:FinalState")){
 			parent.appendChild(parseState(action, state, doc, transitions, states));
 			action = getNextAction(transitions, state);
@@ -71,25 +72,46 @@ public class StateMachineExtractor {
 	private static Element parseState(Element action, Element state, Document doc, NodeList transitions, NodeList states) {
 		String [] action_list = action.getAttribute("name").split(" ");
 		if (action_list[0].equals("receive")){
-			return parseReceiveAction(action_list, state, doc);
+			if(StateMachineValidation.validateReceive(state, action)){
+				return parseReceiveAction(action_list, state, doc);
+			}
+			else{setExceptable(false);}
 		}
 		if (action_list[0].equals("send")){
-			return parseSendAction(action_list, state, doc);
+			if(StateMachineValidation.validateSend(state, action)){
+				return parseSendAction(action_list, state, doc);
+			}
+			else {setExceptable(false);}
 		}
 		if (action_list[0].equals("assign")){
-			return parseAssignAction(action_list, state, doc);
+			if(StateMachineValidation.validateAssign(state, action)){
+				return parseAssignAction(action_list, state, doc);
+			}
+			else{setExceptable(false);}
 		}
 		if (action_list[0].equals("new")){
-			return parseNewStructAction(action, state, doc);
+			if(StateMachineValidation.validateNew(state, action)){
+				return parseNewStructAction(action, state, doc);
+			}
+			else{setExceptable(false);}
 		}
 		if (action_list[0].equals("print")){
-			return parsePrintAction(action_list, state, doc);
+			if(StateMachineValidation.validatePrint(state, action)){
+				return parsePrintAction(action_list, state, doc);
+			}
+			else{setExceptable(false);;}
 		}
 		if (action_list[0].equals("if")){
-			return parseIfAction(action_list, state, doc, transitions, states);
+			if(StateMachineValidation.validateIf(state, action)){
+				return parseIfAction(action_list, state, doc, transitions, states);
+			}
+			else{setExceptable(false);}
 		}
 		if (action_list[0].equals("for")){
-			return parseForAction(action_list, state, doc, transitions, states);
+			if(StateMachineValidation.validateFor(state, action)){
+				return parseForAction(action_list, state, doc, transitions, states);
+			}
+			else{setExceptable(false);}
 		}
 		return parseComment(state, doc);
 	}
@@ -231,6 +253,9 @@ public class StateMachineExtractor {
 	}
 	
 	private static Element getNextAction(NodeList transitions, Element currant_state) {
+		if(!StateMachineValidation.checkTransitionAmount(transitions, currant_state)){
+			setExceptable(false);
+		}
 		for(int i =0; i < transitions.getLength(); i++){
 			Element line = (Element) transitions.item(i);
 			if(line.getAttribute(SOURCE).equals(currant_state.getAttribute(XMI_ID))){
@@ -277,6 +302,14 @@ public class StateMachineExtractor {
 			}
 		}
 		return null;
+	}
+
+	public static boolean getExceptable() {
+		return exceptable;
+	}
+
+	public static void setExceptable(boolean exceptable) {
+		StateMachineExtractor.exceptable = exceptable;
 	}
 
 }

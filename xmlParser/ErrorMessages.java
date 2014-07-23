@@ -14,7 +14,7 @@ public class ErrorMessages {
 	public static void channelNotationNoColon(String chanel_name, String inter_name) {
 		String error_message = "Model Notation Error: in interface " + inter_name + 
 				"in channel" + chanel_name +
-				"\n     Channel must follow <outgoing channel> <colon> <incoming channel>.\n" + 
+				"\n     Channel must follow <channel> <colon> <direction>.\n" + 
 				"     add colon and direction\n";
 		System.err.println(error_message);
 	}
@@ -22,7 +22,7 @@ public class ErrorMessages {
 	public static void channelNotationMoreThanOneColon(String chanel_name, String inter_name) {
 		String error_message = "Model Notation Error: in interface " + inter_name + 
 				"in channel" + chanel_name +
-				"\n     Channel must follow <outgoing channel> <colon> <incoming channel>.\n" + 
+				"\n     Channel must follow <channel> <colon> <direction>.\n" + 
 				"     A more than one colon is in the messaage.\n";
 		System.err.println(error_message);
 		
@@ -53,5 +53,144 @@ public class ErrorMessages {
 				"> \n is not the right direction in interface definition \n";
 		System.err.println(error_message);
 		
+	}
+
+	public static void connectionNotationNoTwoChannels(String name) {
+		String error_message = "Model Notation Error: in dependency <" + name + ">" +
+				"\n     Connecion must follow <outgoing channel> <colon> <incoming channel>.\n" + 
+				"     add colon and channel\n";
+		System.err.println(error_message);
+	}
+
+	public static void channelNotationMoreThanTwoChannels(String name) {
+		String error_message = "Model Notation Error: in dependency <" + name + ">" +
+				"\n     Connecion must follow <outgoing channel> <colon> <incoming channel>.\n" + 
+				"     remove unneeded colons and channels\n";
+		System.err.println(error_message);
+	}
+
+	public static void badOutgoingDependency(String name) {
+		String error_message = "Model Notation Error: in dependency <" + name + ">" +
+				"\n     Outgoing dependency must be an instance or an associate.\n" + 
+				"     1) delete dependency\n" +
+				"     2) move out node to a instance or an associate\n";
+		System.err.println(error_message);
+	}
+
+	public static void badIncomingDependency(String name) {
+		String error_message = "Model Notation Error: in dependency <" + name + ">" +
+				"\n     Incoming dependency must be an instance or an associate.\n" + 
+				"     1) delete dependency\n" +
+				"     2) move in node to a instance or an associate\n";
+		System.err.println(error_message);
+	}
+
+	public static void sendBehaviourWrongDriction(String name, String channel) {
+		String error_message = "Model Notation Error: in behaviour action <send " + name +
+				" on " + channel + 
+				"> is not an 'out' channle.\n" +
+				"     1) change channel to 'out'\n" +
+				"     2) send on different channel\n";
+		System.err.println(error_message);
+	}
+
+	public static void behaviourOutChannelNotFound(String name, String channel) {
+		String error_message = "Model Notation Error: in behaviour action <send " + name +
+				" on " + channel + 
+				"> channel is not defined.\n" +
+				"     1) create channel in structure\n" +
+				"     2) create state as a comment\n";
+		System.err.println(error_message);
+	}
+
+	public static void receiveBehaviourWrongDriction(String name, String channel) {
+		String error_message = "Model Notation Error: in behaviour action <receive " + name +
+				" on " + channel + 
+				"> is not an 'in' channle.\n" +
+				"     1) change channel to 'in'\n" +
+				"     2) send on different channel\n";
+		System.err.println(error_message);
+	}
+
+	public static void behaviourInChannelNotFound(String name, String channel) {
+		String error_message = "Model Notation Error: in behaviour action <receive " + name +
+				" on " + channel + 
+				"> channel is not defined.\n" +
+				"     1) create channel in structure\n" +
+				"     2) create state as a comment\n";
+		System.err.println(error_message);
+	}
+
+	public static void OneTooManyTransitions(String name, int counter) {
+		String error_message = "Model Notation Error: in behaviour state <" + name +
+				"> has " + (counter-1)+ 
+				" one too many tranistions " + 
+				"> channel is not defined.\n" +
+				"     1) delete tranitions\n" +
+				"     2) rename tranitions 'then' or 'else' if needed\n";
+		System.err.println(error_message);
+	}
+
+	public static void WrongReceiveAction(String action_name) {
+		String error_message = "Model Notation Error: in behaviour action <" + action_name +
+				"> needs more information \n" + 
+				"     must follow <receive><from><channel name>[additional information]";
+		System.err.println(error_message);
+	}
+
+	public static void WrongVariableState(String state_name) {
+		String error_message = "Model Notation Error: in behaviour state <" + state_name +
+				"> needs more information \n" + 
+				"     must follow <variable>[additional information]";
+		System.err.println(error_message);
+	}
+
+	public static void WrongSendAction(String action_name) {
+		String error_message = "Model Notation Error: in behaviour action <" + action_name +
+				"> needs more information \n" + 
+				"     must follow <send><from><channel name>[additional information]";
+		System.err.println(error_message);
+	}
+
+	public static void WrongAssignAction(String action_name) {
+		String error_message = "Model Notation Error: in behaviour action <" + action_name +
+				"> needs more information \n" + 
+				"     must follow <assign><from>[any]<colon><passing objext>[additional information]";
+		System.err.println(error_message);
+	}
+
+	public static void WrongAssignColonAction(String action_name) {
+		String error_message = "Model Notation Error: in behaviour action <" + action_name +
+				"> colon used but more information needed \n" + 
+				"     must follow <assign><from>[any]<colon><passing objext>[additional information]";
+		System.err.println(error_message);
+	}
+
+	public static void WrongNewActionColons(String action_name) {
+		String error_message = "Model Notation Error: in behaviour action <" + action_name +
+				"> needs more information \n" + 
+				"     must follow <new><colon><struct type><colon>[aditional information separated by commons]";
+		System.err.println(error_message);
+	}
+
+	public static void WrongPrintAction(String action_name) {
+		String error_message = "Model Notation Error: in behaviour action <" + action_name +
+				"> needs more information \n" + 
+				"     must follow <print><type>";
+		System.err.println(error_message);
+	}
+
+	public static void WrongIfState(String state_name) {
+		String error_message = "Model Notation Error: in behaviour state <" + state_name +
+				"> if statement needs clause \n" + 
+				"     must follow <if clause>[additional information]";
+		System.err.println(error_message);
+	}
+
+	public static void WrongForState(String state_name) {
+		String error_message = "Model Notation Error: in behaviour state <" + state_name +
+				"> more information needed \n" + 
+				"     must follow <identifier><colon><limit><equal sign><value>[additional information]";
+		System.err.println(error_message);
 	}
 }

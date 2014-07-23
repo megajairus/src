@@ -86,13 +86,19 @@ public class StructureExtractor {
 			}
 		}
 		}
+		if (!StructureValidation.checkDependencies(structure)){
+			exceptable = false;
+		}
 		return exceptable;
 	}
 
 
-	private static boolean coonectionNotationAccepted(Element eElement) {
-		// TODO Auto-generated method stub
-		return false;
+	private static boolean coonectionNotationAccepted(Element connect) {
+		String name = connect.getAttribute("name");
+		if(!StructureValidation.connectionNameNotation(name)){
+			return false;
+		}
+		return true;
 	}
 
 
