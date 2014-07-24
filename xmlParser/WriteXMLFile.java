@@ -55,8 +55,9 @@ public class WriteXMLFile {
 			}
 			Element e_connection = doc.createElement("connect");
 			for(int i =0 ; i < structure.connectionSize(); i++){
-				e_connection.appendChild(connectionNodeTo(doc, structure.getConnections(i)));
 				e_connection.appendChild(connectionNodeFrom(doc, structure.getConnections(i)));
+				e_connection.appendChild(connectionNodeTo(doc, structure.getConnections(i)));
+				
 			}
 			
 			rootElement.appendChild(e_connection);

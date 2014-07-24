@@ -19,11 +19,11 @@
 </component>
 <instance component="TempReader" name="tr"/>
 <connect>
-<to name="lightHumidTempSensor" on="tRequestChan"/>
 <from name="tr" on="tRequestChan"/>
-<to name="" on="standardOut"/>
+<to name="lightHumidTempSensor" on="tRequestChan"/>
 <from name="tr" on="stdoutChan"/>
-<to name="tr" on="tValueChan"/>
+<to name="" on="standardOut"/>
 <from name="lightHumidTempSensor" on="tempOutput"/>
+<to name="tr" on="tValueChan"/>
 </connect>
 </xsd:schema>
