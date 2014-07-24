@@ -247,6 +247,7 @@ public class StateMachineValidation {
 			}
 		}
 		if(state_list[0].equals("")){
+			
 			ErrorMessages.WrongVariableState(State_name);
 			exceptable = false;
 		}
@@ -264,6 +265,7 @@ public class StateMachineValidation {
 			exceptable = false;
 		}
 		if(state_list[0].equals("")){
+			System.out.print(State_name + " <->" + state_list[1]);
 			ErrorMessages.WrongVariableState(State_name);
 			exceptable = false;
 		}
