@@ -1,29 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<struct>
+<attribute name="sensorReading"/>
+<field name="photo" type="integer"/>
+<field name="solar" type="integer"/>
+<field name="temp" type="real"/>
+<field name="humid" type="real"/>
+<field name="jairus" type="unsigned"/>
+</struct>
 <interface>
-<attribute name="ITempReader"/>
-<channel direction="out" name="tRequestChan" type="bool"/>
-<channel direction="in" name="tValueChan" type="Real"/>
-<channel direction="out" name="stdoutChan" type="any"/>
+<attribute name="ISensorReader"/>
+<channel direction="in" name="ticks" type="bool"/>
+<channel direction="out" name="printChan" type="sensorReading"/>
+<channel direction="out" name="ledsChan" type="sensorReading"/>
+</interface>
+<interface>
+<attribute name="IPrintOutput"/>
+<channel direction="in" name="input" type="sensorReading"/>
+</interface>
+<interface>
+<attribute name="ILedOutput"/>
+<channel direction="in" name="input" type="sensorReading"/>
 </interface>
 <component>
-<attribute name="TempReader"/>
-<presents name="ITempReader"/>
+<attribute name="SensorReader"/>
+<presents name="ISensorReader"/>
 <constructor/>
 <behaviour>
-<send identifier="true" on="tRequestChan"/>
-<receive from="tValueChan" identifier="temp"/>
-<send identifier="any" on="stdoutChan" value="'\nTemp='"/>
-<send identifier="any" on="stdoutChan" value="temp"/>
+<receive from="ticks" identifier="tick"/>
+<variable allocation="static" bindingTo="photoReading()" name="photoValue"/>
+<variable allocation="static" bindingTo="solarReading()" name="solarValue"/>
+<variable allocation="static" bindingTo="tempCelsiusReading()" name="tempValue"/>
+<variable allocation="static" bindingTo="relHumidReading()" name="humdityValue"/>
+<variable type=" SensorReading">
+<attibute name="reading is a new photoReading"/>
+<attibute allocation="dynamic"/>
+<parameter name="photoValue"/>
+<parameter name="solarValue"/>
+<parameter name="tempValue"/>
+<parameter name="humidityValuereading"/>
+</variable>
+<send identifier="reading" on="ledsChan"/>
+<send identifier="reading" on="printChan"/>
+<if_clause clause="Fork0">
+<then>
+<comment text="State0"/>
+</then>
+<else>
+<comment text="State1"/>
+</else>
+</if_clause>
+<print titleString="string" type="string" variable="jairus"/>
 </behaviour>
 </component>
-<instance component="TempReader" name="tr"/>
+<component>
+<attribute name="PrintOutput"/>
+<presents name="IPrintOutput"/>
+<field name="cycle" type="integer" value="0"/>
+<constructor/>
+<behaviour>
+<receive from="input" identifier="reading"/>
+<print titleString="Int" type="Int" variable="cycle"/>
+<print attribute="photo" titleString="Int" type="Int" variable="reading"/>
+<print attribute="solar" titleString="type" type="type" variable="reading"/>
+<print attribute="temp" titleString="Int" type="Int" variable="reading"/>
+<print attribute="humid" titleString="Int" type="Int" variable="reading"/>
+<variable allocation="static" bindingTo="cycle+1" name="cycle"/>
+</behaviour>
+</component>
+<component>
+<attribute name="LedOutput"/>
+<presents name="ILedOutput"/>
+<field name="avgTemp" type="integer" value="0.0"/>
+<field name="avgSolar" type="integer" value="0"/>
+<field name="avgHumid" type="integer" value="0.0"/>
+<constructor/>
+<behaviour>
+<receive from="input" identifier="reading"/>
+<comment text="set LEDs, R/G/B for high temp/umidity/light"/>
+<comment text="set averages"/>
+</behaviour>
+</component>
+<instance component="SensorReader" name="sr"/>
+<instance component="LedOutput" name="lo"/>
+<instance component="PrintOutput" name="po"/>
 <connect>
-<from name="tr" on="tRequestChan"/>
-<to name="lightHumidTempSensor" on="tRequestChan"/>
-<from name="tr" on="stdoutChan"/>
-<to name="" on="standardOut"/>
-<from name="lightHumidTempSensor" on="tempOutput"/>
-<to name="tr" on="tValueChan"/>
+<from name="sr" on="printChan"/>
+<to name="po" on="input"/>
+<from name="sr" on="ledsChan"/>
+<to name="lo" on="input"/>
 </connect>
 </xsd:schema>

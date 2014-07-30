@@ -161,9 +161,7 @@ public class StructureExtractor {
 			NodeList attributes = element.getElementsByTagName("type");
 			if (attributes.getLength() > 0){
 				Element e_type = (Element) attributes.item(0);
-				String primitive_type = e_type.getAttribute("href");
-				String[] type_array = primitive_type.split("#");
-				type = type_array[1];
+				type = translateType(e_type);
 				return new Variable(name, type, false);
 			}
 			else{
@@ -174,6 +172,24 @@ public class StructureExtractor {
 			
 			return new Variable(name, type, true);
 		}
+	}
+
+
+	private static String translateType(Element e_type) {
+		String temp_type;
+		String type = "any";
+		String primitive_type = e_type.getAttribute("href");
+		String[] type_array = primitive_type.split("#");
+		temp_type = type_array[1];
+		switch(temp_type){
+		case "Integer": type = "integer"; break;
+		case "UnlimitedNatural": type = "unsigned"; break;
+		case "Boolean": type = "bool"; break;
+		case "Real": type = "real"; break;
+		case "String": type = "string"; break;
+		}
+			
+		return type;
 	}
 
 	private static Connection parseConnection(Element connect) {

@@ -23,7 +23,9 @@ public class StateMachineExtractor {
 	private static final String TRANSITION = "transition";
 	private static final String SUBVERTEX = "subvertex";
 	private static  boolean exceptable;
-
+	private static Element saved_state;
+	private static Element saved_action;
+	private static boolean skip_clause;
 	public static boolean loadBehaviours(ArrayList<Document> docs, StructureData structure, ArrayList<BehaviourElement> component_behaviour) throws ParserConfigurationException {
 		setExceptable(true);
 		for(int documentIndex = 0; documentIndex < docs.size(); documentIndex++){
@@ -31,6 +33,8 @@ public class StateMachineExtractor {
 			for(int i =0; i < machines.getLength(); i++){
 				Element e_machine = (Element) machines.item(i);
 				if(structure.componentExists(e_machine.getAttribute("name"))){
+					setSavedState(null);
+					setSkipClause(false);
 					DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 					DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 					Document doc = docBuilder.newDocument();
@@ -53,13 +57,29 @@ public class StateMachineExtractor {
 
 	private static Element trackBehaviours(NodeList states, NodeList transitions, Element state, Element action,Element parent,  Document doc) {
 		while(!state.getAttribute(XMI_TYPE).equals("uml:FinalState")){
+			System.out.println(parent.getNodeName() +  ", " + state.getAttribute("name"));
+			if(state.getAttribute("kind").equals("join")){
+				action = getNextAction(transitions, state);
+				if (action == null){
+					return parent;
+				}
+				state = getNextState(states, action);
+				if (state == null || action == null){
+					return parent;
+				}
+				setSavedAction(action);
+				setSavedState(state);
+				return parent;
+			}
 			parent.appendChild(parseState(action, state, doc, transitions, states));
 			action = getNextAction(transitions, state);
 			if (action == null){
+				System.out.println("a");
 				return parent;
 			}
 			state = getNextState(states, action);
 			if (state == null || action == null){
+				System.out.println("b");
 				return parent;
 			}
 			
@@ -134,6 +154,7 @@ public class StateMachineExtractor {
 			return element;
 		}
 		element = (trackBehaviours(states, transitions, next_state, next_action, element, doc));
+		setSkipClause(true);
 		return element;
 	}
 
@@ -164,6 +185,7 @@ public class StateMachineExtractor {
 		Element else_element = doc.createElement("else");
 		else_element = (trackBehaviours(states, transitions, next_state,next_action, else_element, doc));
 		element.appendChild(else_element);
+		setSkipClause(true);
 		return element;
 	}
 
@@ -253,6 +275,14 @@ public class StateMachineExtractor {
 	}
 	
 	private static Element getNextAction(NodeList transitions, Element currant_state) {
+		Element state;
+		if(isSkipClause()){
+			state = getSavedState();
+			if(!StateMachineValidation.checkTransitionAmount(transitions, state)){
+				setExceptable(false);
+			}
+			return getSavedAction();
+		}
 		if(!StateMachineValidation.checkTransitionAmount(transitions, currant_state)){
 			setExceptable(false);
 		}
@@ -264,10 +294,18 @@ public class StateMachineExtractor {
 				}
 			}
 		}
+		System.out.println("c");
 		return null;
 	}
 
 	private static Element getNextState(NodeList states, Element action) {
+		if(isSkipClause()){
+			System.out.println("inside this loop");
+			Element new_state = getSavedState();
+			setSavedState(null);
+			setSkipClause(false);
+			return new_state;
+		}
 		for(int j = 0; j < states.getLength(); j++){
 			Element new_state = (Element) states.item(j);
 			if(action.getAttribute("target").equals(new_state.getAttribute(XMI_ID))){
@@ -310,6 +348,30 @@ public class StateMachineExtractor {
 
 	public static void setExceptable(boolean exceptable) {
 		StateMachineExtractor.exceptable = exceptable;
+	}
+
+	public static Element getSavedState() {
+		return saved_state;
+	}
+
+	public static void setSavedState(Element saved_element) {
+		StateMachineExtractor.saved_state = saved_element;
+	}
+
+	public static boolean isSkipClause() {
+		return skip_clause;
+	}
+
+	public static void setSkipClause(boolean skip_clause) {
+		StateMachineExtractor.skip_clause = skip_clause;
+	}
+
+	public static Element getSavedAction() {
+		return saved_action;
+	}
+
+	public static void setSavedAction(Element saved_action) {
+		StateMachineExtractor.saved_action = saved_action;
 	}
 
 }
