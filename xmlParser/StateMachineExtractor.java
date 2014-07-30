@@ -203,7 +203,13 @@ public class StateMachineExtractor {
 		String [] state_list = state.getAttribute("name").split("\\.");
 		Element element = doc.createElement("print");
 		if (action_list.length > 1){
-			element.setAttribute("titleString", action_list[1]);
+			String title = "";
+			for (int i = 2; i < action_list.length; i++){
+				title = title + " " + action_list[i];
+				
+			}
+			title = title + " ";
+			element.setAttribute("titleString", title);
 		}
 		else{
 			element.setAttribute("titleString", "");
