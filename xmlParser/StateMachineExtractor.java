@@ -200,20 +200,34 @@ public class StateMachineExtractor {
 
 	private static Element parsePrintAction(String[] action_list,
 			Element state, Document doc) {
-		String [] state_list = state.getAttribute("name").split("\\.");
+		String state_name = state.getAttribute("name");
+		String [] state_list = state_name.split(" ");
+		state_list = state_list[0].split("\\.");
 		Element element = doc.createElement("print");
 		if (action_list.length > 1){
-			element.setAttribute("titleString", action_list[1]);
+			element.setAttribute("type", action_list[1]);
 		}
 		else{
-			element.setAttribute("titleString", "");
+			element.setAttribute("type", "");
 		}
-		element.setAttribute("variable", state_list[0]);
-		if (state_list.length > 1){
-			element.setAttribute("attribute", state_list[1]);
+		if(state_name.contains("\"")){
+			element.setAttribute("variable", parseQuotes(state_name));
 		}
-		element.setAttribute("type", action_list[1]);
+		else{
+			element.setAttribute("variable", state_list[0]);
+			if (state_list.length > 1){
+				element.setAttribute("attribute", state_list[1]);
+			}
+		}
 		return element;
+	}
+
+	private static String parseQuotes(String name) {
+		int start;
+		int end;
+		start = name.indexOf("\"");
+		end = name.indexOf("\"", (start + 1));
+		return name.substring(start+1, end);
 	}
 
 	private static Element parseNewStructAction(Element action,

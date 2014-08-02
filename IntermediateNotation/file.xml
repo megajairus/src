@@ -6,7 +6,6 @@
 <field name="solar" type="integer"/>
 <field name="temp" type="real"/>
 <field name="humid" type="real"/>
-<field name="jairus" type="unsigned"/>
 </struct>
 <interface>
 <attribute name="ISensorReader"/>
@@ -42,15 +41,6 @@
 </variable>
 <send identifier="reading" on="ledsChan"/>
 <send identifier="reading" on="printChan"/>
-<if_clause clause="Fork0">
-<then>
-<comment text="State0"/>
-</then>
-<else>
-<comment text="State1"/>
-</else>
-</if_clause>
-<print titleString="string" type="string" variable="jairus"/>
 </behaviour>
 </component>
 <component>
@@ -60,11 +50,11 @@
 <constructor/>
 <behaviour>
 <receive from="input" identifier="reading"/>
-<print titleString="Int" type="Int" variable="cycle"/>
-<print attribute="photo" titleString="Int" type="Int" variable="reading"/>
-<print attribute="solar" titleString="type" type="type" variable="reading"/>
-<print attribute="temp" titleString="Int" type="Int" variable="reading"/>
-<print attribute="humid" titleString="Int" type="Int" variable="reading"/>
+<print type="Int" variable="cycle"/>
+<print attribute="photo" type="Int" variable="reading"/>
+<print attribute="solar" type="type" variable="reading"/>
+<print attribute="temp" type="Int" variable="reading"/>
+<print attribute="humid" type="Int" variable="reading"/>
 <variable allocation="static" bindingTo="cycle+1" name="cycle"/>
 </behaviour>
 </component>
