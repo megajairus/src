@@ -225,7 +225,7 @@ public class StateMachineExtractor {
 	private static Element parseNewStructAction(Element action,
 			Element state, Document doc) {
 		String [] action_list = action.getAttribute("name").split(":");
-		String [] state_list = state.getAttribute("name").split(":");
+		String [] state_list = state.getAttribute("name").split(" ");
 		Element element = doc.createElement("variable");
 		element.setAttribute("type", action_list[1]);
 		Element attribute = doc.createElement("attibute");

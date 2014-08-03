@@ -16,6 +16,17 @@ public class Connection {
 		this.to_component_id = to_component_id;
 	}
 	
+	public Connection(String in_channel, String out_channel, String to_component_id, String from_component_id,
+			String from_component, String to_component) {
+		this.in_channel = in_channel;
+		this.out_channel = out_channel;
+		this.from_component_id = from_component_id;
+		this.to_component_id = to_component_id;
+		this.from_component = from_component;
+		this.to_component = to_component;
+		
+	}
+
 	public void setComponents(String from_component, String to_component){
 		this.from_component = from_component;
 		this.to_component = to_component;
