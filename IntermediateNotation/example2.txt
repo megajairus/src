@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<interface>
+<attribute name="ITempReader"/>
+<channel direction="out" name="tRequestChan" type="bool"/>
+<channel direction="in" name="tValueChan" type="real"/>
+<channel direction="out" name="stdoutChan" type="any"/>
+</interface>
+<component>
+<attribute name="TempReader"/>
+<presents name="ITempReader"/>
+<constructor/>
+<behaviour>
+<send identifier="true" on="tRequestChan"/>
+<receive from="tValueChan" identifier="temp"/>
+<send identifier="any" on="stdoutChan" value="'\nTemp='"/>
+<send identifier="any" on="stdoutChan" value="temp"/>
+</behaviour>
+</component>
+<instance component="TempReader" name="tr"/>
+<connect>
+<from name="tr" on="tRequestChan"/>
+<to name="lightHumidTempSensor" on="tRequestChan"/>
+<from name="tr" on="stdoutChan"/>
+<to name="" on="standardOut"/>
+<from name="lightHumidTempSensor" on="tempOutput"/>
+<to name="tr" on="tValueChan"/>
+</connect>
+</xsd:schema>
+----------------------------
+

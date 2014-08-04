@@ -51,12 +51,12 @@ public class ModelAnalyser {
 			ErrorMessages.cannotContinue();
 			return;
 		}
-		docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_DEPLOYMENT_DIAGRAM);
-		model_excepted = DeploymentExtractor.loadDateFields(docs, deployments, temps);
-		if (!model_excepted){
-			ErrorMessages.cannotContinue();
-			return;
-		}
+		//docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_DEPLOYMENT_DIAGRAM);
+		//model_excepted = DeploymentExtractor.loadDateFields(docs, deployments, temps);
+		//if (!model_excepted){
+		//	ErrorMessages.cannotContinue();
+		//	return;
+		//}
 		DeploymentPerfecter.finishPackageDate(structure, deployments, temps);
 		WriteXMLFile.createIntermediateLanguage(structure, component_behaviour);
 		System.out.println("----------------------------");

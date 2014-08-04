@@ -57,7 +57,6 @@ public class StateMachineExtractor {
 
 	private static Element trackBehaviours(NodeList states, NodeList transitions, Element state, Element action,Element parent,  Document doc) {
 		while(!state.getAttribute(XMI_TYPE).equals("uml:FinalState")){
-			System.out.println(parent.getNodeName() +  ", " + state.getAttribute("name"));
 			if(state.getAttribute("kind").equals("join")){
 				action = getNextAction(transitions, state);
 				if (action == null){
@@ -74,12 +73,10 @@ public class StateMachineExtractor {
 			parent.appendChild(parseState(action, state, doc, transitions, states));
 			action = getNextAction(transitions, state);
 			if (action == null){
-				System.out.println("a");
 				return parent;
 			}
 			state = getNextState(states, action);
 			if (state == null || action == null){
-				System.out.println("b");
 				return parent;
 			}
 			
@@ -199,27 +196,32 @@ public class StateMachineExtractor {
 	}
 
 	private static Element parsePrintAction(String[] action_list,
-			Element state, Document doc) {
-		String [] state_list = state.getAttribute("name").split("\\.");
+		Element state, Document doc) {
+		String state_name = state.getAttribute("name");
+		String [] state_list = state_name.split(" ");
+		state_list = state_list[0].split("\\.");
 		Element element = doc.createElement("print");
 		if (action_list.length > 1){
-			String title = "";
-			for (int i = 2; i < action_list.length; i++){
-				title = title + " " + action_list[i];
-				
-			}
-			title = title + " ";
-			element.setAttribute("titleString", title);
+			element.setAttribute("type", action_list[1]);
 		}
 		else{
-			element.setAttribute("titleString", "");
+			element.setAttribute("type", "");
 		}
-		element.setAttribute("variable", state_list[0]);
-		if (state_list.length > 1){
-			element.setAttribute("attribute", state_list[1]);
+		if(state_name.contains("\"")){
+			element.setAttribute("variable", parseQuotes(state_name));
 		}
-		element.setAttribute("type", action_list[1]);
+		else{
+			element.setAttribute("variable", state_list[0]);
+		}
 		return element;
+	}
+	
+	private static String parseQuotes(String name) {
+		int start;
+		int end;
+		start = name.indexOf("\"");
+		end = name.indexOf("\"", (start + 1));
+		return ("'" + name.substring(start+1, end) + "'");
 	}
 
 	private static Element parseNewStructAction(Element action,
@@ -228,10 +230,10 @@ public class StateMachineExtractor {
 		String [] state_list = state.getAttribute("name").split(" ");
 		Element element = doc.createElement("variable");
 		element.setAttribute("type", action_list[1]);
-		Element attribute = doc.createElement("attibute");
+		Element attribute = doc.createElement("attribute");
 		attribute.setAttribute("name", state_list[0]);
 		element.appendChild(attribute);
-		attribute = doc.createElement("attibute");
+		attribute = doc.createElement("attribute");
 		attribute.setAttribute("allocation", "dynamic");
 		element.appendChild(attribute);
 		String [] parameters = action_list[2].split(",");
