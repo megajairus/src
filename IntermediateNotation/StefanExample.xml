@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<nodeName name="StefanExample"/>
 <interface>
 <attribute name="ITempReader"/>
 <channel direction="out" name="tRequestChan" type="bool"/>
@@ -15,6 +16,21 @@
 <receive from="tValueChan" identifier="temp"/>
 <send identifier="any" on="stdoutChan" value="'\nTemp='"/>
 <send identifier="any" on="stdoutChan" value="temp"/>
+</behaviour>
+</component>
+<component>
+<attribute name="jairus"/>
+<constructor/>
+<behaviour>
+<for counterName="i" iterateThrough="10" value="0">
+<if clause="i&gt;5">
+<then>
+<print type="integer" variable="i"/>
+</then>
+</if>
+<print type="string" variable="'not high enough'"/>
+</for>
+<print type="string" variable="done"/>
 </behaviour>
 </component>
 <instance component="TempReader" name="tr"/>

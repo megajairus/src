@@ -12,7 +12,9 @@ public class Interface {
 		this.id = id;
 		this.channels = channels;
 	}
-	
+	public  ArrayList<Channel> getChannels(){
+		return channels;
+	}
 	public void addVaiable(String name, String type, Boolean pointer, String direction){
 		channels.add(new Channel(name, type, pointer, direction));
 	}

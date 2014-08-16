@@ -134,20 +134,22 @@ public class StateMachineExtractor {
 	}
 
 	private static Element parseForAction(String[] action_list, Element state,
-			Document doc, NodeList transitions, NodeList states) {
+			Document doc, NodeList transitions, NodeList states) {// counterName ="i" value ="0" iterateThrough="ints
 		String name = state.getAttribute("name");
 		String []for_part = name.split(":");
 		String [] identifier = for_part[0].split("=");
-		Element element = doc.createElement("for_clause");
-		element.setAttribute("identifier", identifier[0]);
+		Element element = doc.createElement("for");
+		element.setAttribute("counterName", identifier[0]);
 		element.setAttribute("value", identifier[1]);
-		element.setAttribute("limit", for_part[1]);
-		Element next_action = getNextSecondAction(transitions,states, state, "then");
+		element.setAttribute("iterateThrough", for_part[1]);
+		Element next_action = getNextSecondAction(transitions,states, state, "body");
 		if (next_action == null){
+			setSkipClause(true);
 			return element;
 		}
 		Element next_state = getNextState(states, next_action);
 		if (next_state == null){
+			setSkipClause(true);
 			return element;
 		}
 		element = (trackBehaviours(states, transitions, next_state, next_action, element, doc));
@@ -158,14 +160,16 @@ public class StateMachineExtractor {
 	private static Element parseIfAction(String[] action_list, Element state,
 			Document doc, NodeList transitions, NodeList states) {
 		String name = state.getAttribute("name");
-		Element element = doc.createElement("if_clause");
+		Element element = doc.createElement("if");
 		element.setAttribute("clause", name);
 		Element next_action = getNextSecondAction(transitions, states, state, "then");
 		if (next_action == null){
+			setSkipClause(true);
 			return element;
 		}
 		Element next_state = getNextState(states, next_action);
 		if (next_state == null){
+			setSkipClause(true);
 			return element;
 		}
 		Element then_element = doc.createElement("then");
@@ -173,10 +177,12 @@ public class StateMachineExtractor {
 		element.appendChild(then_element);
 		next_action = getNextSecondAction(transitions, states,  state, "else");
 		if ( next_action == null){
+			setSkipClause(true);
 			return element;
 		}
 		next_state = getNextState(states, next_action);
 		if(next_state == null){
+			setSkipClause(true);
 			return element;
 		}
 		Element else_element = doc.createElement("else");
@@ -229,19 +235,21 @@ public class StateMachineExtractor {
 		String [] action_list = action.getAttribute("name").split(":");
 		String [] state_list = state.getAttribute("name").split(" ");
 		Element element = doc.createElement("variable");
-		element.setAttribute("type", action_list[1]);
-		Element attribute = doc.createElement("attribute");
-		attribute.setAttribute("name", state_list[0]);
-		element.appendChild(attribute);
-		attribute = doc.createElement("attribute");
-		attribute.setAttribute("allocation", "dynamic");
-		element.appendChild(attribute);
-		String [] parameters = action_list[2].split(",");
-		for (int i = 0; i < parameters.length; i++){
-			Element param = doc.createElement("parameter");
-			param.setAttribute("name", parameters[i].replaceAll(" ", ""));
-			element.appendChild(param);
-		}
+		element.setAttribute("type", "");
+		element.setAttribute("name", state_list[0]);
+		element.setAttribute("bindingTo", action_list[1] + "(" + action_list[2] + ")");
+		//Element attribute = doc.createElement("attribute");
+		//attribute.setAttribute("name", state_list[0]);
+		//element.appendChild(attribute);
+		//attribute = doc.createElement("attribute");
+		element.setAttribute("new", "true");
+		//element.appendChild(attribute);
+		//String [] parameters = action_list[2].split(",");
+		//for (int i = 0; i < parameters.length; i++){
+		//	Element param = doc.createElement("parameter");
+		//	param.setAttribute("name", parameters[i].replaceAll(" ", ""));
+		//	element.appendChild(param);
+		//}
 		return element;
 	}
 
@@ -250,8 +258,14 @@ public class StateMachineExtractor {
 		String [] state_list = state.getAttribute("name").split(" ");
 		Element element = doc.createElement("variable");
 		element.setAttribute("name", state_list[0]);
-		element.setAttribute("allocation", "static");
+		element.setAttribute("new", "false");
 		element.setAttribute("bindingTo", action_list[2]);
+		if(action_list.length > 3){
+			element.setAttribute("type", state_list[3]);
+		}
+		else{
+			element.setAttribute("type", "");
+		}
 		return element;
 	}
 
@@ -289,7 +303,9 @@ public class StateMachineExtractor {
 			if(!StateMachineValidation.checkTransitionAmount(transitions, state)){
 				setExceptable(false);
 			}
-			return getSavedAction();
+			Element new_action = getSavedAction();
+			setSavedAction(null);
+			return new_action;
 		}
 		if(!StateMachineValidation.checkTransitionAmount(transitions, currant_state)){
 			setExceptable(false);
@@ -302,13 +318,11 @@ public class StateMachineExtractor {
 				}
 			}
 		}
-		System.out.println("c");
 		return null;
 	}
 
 	private static Element getNextState(NodeList states, Element action) {
 		if(isSkipClause()){
-			System.out.println("inside this loop");
 			Element new_state = getSavedState();
 			setSavedState(null);
 			setSkipClause(false);

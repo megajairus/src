@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<nodeName name="Node2" ofTotal="2" orderNumber="2"/>
+<struct>
+<attribute name="sensorReading"/>
+<field name="photo" type="integer"/>
+<field name="solar" type="integer"/>
+<field name="temp" type="real"/>
+<field name="humid" type="real"/>
+</struct>
+<interface>
+<attribute name="ILedOutput"/>
+<channel direction="in" name="input" type="sensorReading"/>
+</interface>
+<interface>
+<attribute name="IPrintOutput"/>
+<channel direction="in" name="input" type="sensorReading"/>
+</interface>
+<component>
+<attribute name="LedOutput"/>
+<presents name="ILedOutput"/>
+<field name="avgTemp" type="" value="0.0"/>
+<field name="avgSolar" type="" value="0"/>
+<field name="avgHumid" type="" value="0.0"/>
+<procedure type="sensorReading">
+<attribute name="jairus"/>
+<attribute name="parameters">
+<field name="temp" type="integer"/>
+</attribute>
+<attribute name="parameters">
+<field name="reading" type="sensorReading"/>
+</attribute>
+</procedure>
+<constructor/>
+<behaviour>
+<receive from="input" identifier="reading"/>
+<comment text="set LEDs, R/G/B for high temp/humidity/light"/>
+<comment text="set averages"/>
+</behaviour>
+</component>
+<component>
+<attribute name="PrintOutput"/>
+<presents name="IPrintOutput"/>
+<field name="cycle" type="" value="0"/>
+<procedure type="string">
+<attribute name="getJairus"/>
+<attribute name="parameters">
+<field name="input" type="string"/>
+</attribute>
+</procedure>
+<constructor/>
+<behaviour>
+<receive from="input" identifier="reading"/>
+<print type="string" variable="'Cycle '"/>
+<print type="Int" variable="cycle"/>
+<print type="string" variable="':\tphoto = '"/>
+<print type="Int" variable="reading"/>
+<print type="string" variable="'\tsolar = '"/>
+<print type="Int" variable="reading"/>
+<print type="string" variable="'\ttemp = '"/>
+<print type="Int" variable="reading"/>
+<print type="string" variable="'\thumid = '"/>
+<print type="Int" variable="reading"/>
+<print type="integer" variable="'\n'"/>
+<variable bindingTo="cycle+1" name="cycle" new="false" type=""/>
+</behaviour>
+</component>
+<instance component="LedOutput" name="lo"/>
+<instance component="PrintOutput" name="po"/>
+<connect/>
+<interNodeConnect direction="receive" otherNode="Node1" type="sensorReading">
+<to name="lo" on="input"/>
+<from name="sr" on="ledsChan"/>
+</interNodeConnect>
+<interNodeConnect direction="receive" otherNode="Node1" type="sensorReading">
+<to name="po" on="input"/>
+<from name="sr" on="printChan"/>
+</interNodeConnect>
+</xsd:schema>

@@ -141,11 +141,6 @@ public class StructurePerfecter {
 					structure.getComponents(i).setVariableType(j, type);
 					structure.getComponents(i).setVariablePointer(j, false);
 				}
-				else{
-					if (structure.getComponents(i).getVariableType(j).equals("Boolean")){
-						structure.getComponents(i).setVariableType(j, "bool");
-					}
-				}
 			}
 			for(int j=0; j < structure.getComponents(i).procedureSize(); j++){
 				if (structure.getComponents(i).getProcedureReturnPointer(j)){
@@ -153,21 +148,11 @@ public class StructurePerfecter {
 					type = findType(type, structure.getStructList());
 					structure.getComponents(i).getProcedure(j).setReturn(false, type);
 				}
-				else{
-					if (structure.getComponents(i).getProcedureReturn(j).equals("Boolean")){
-						structure.getComponents(i).getProcedure(j).setReturn(false, "bool");
-					}
-				}
 				for(int k = 0; k < structure.getComponents(i).procedureParameterSize(j); k++){
 					if(structure.getComponents(i).getProcedureParameterPointer(j, k)){
 						String type = structure.getComponents(i).getProcedureVariableType(j, k);
 						type = findType(type, structure.getStructList());
 						structure.getComponents(i).getProcedure(j).setParameter(k, false, type);
-					}
-					else{
-						if (structure.getComponents(i).getProcedureVariableType(j, k).equals("Boolean")){
-							structure.getComponents(i).getProcedure(j).setParameter(k, false, "bool");
-						}
 					}
 				}
 				

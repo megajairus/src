@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<nodeName name="diss" ofTotal="1" orderNumber="1"/>
+<struct>
+<attribute name="StructureData"/>
+<field name="node_name" type="string"/>
+<field name="order_number" type="integer"/>
+</struct>
+<struct>
+<attribute name="Component"/>
+<field name="" type="StructureData"/>
+<field name="presents" type="string"/>
+</struct>
+<struct>
+<attribute name="Procedure"/>
+<field name="name" type="string"/>
+<field name="" type="Component"/>
+<field name="struct" type="Struct"/>
+</struct>
+<struct>
+<attribute name="Variable"/>
+<field name="name" type="string"/>
+<field name="type" type="string"/>
+<field name="pointer" type="bool"/>
+<field name="" type="Procedure"/>
+<field name="" type="Struct"/>
+</struct>
+<struct>
+<attribute name="Struct"/>
+<field name="" type="StructureData"/>
+<field name="name" type="string"/>
+<field name="id" type="string"/>
+</struct>
+<struct>
+<attribute name="Interface"/>
+<field name="name" type="string"/>
+<field name="id" type="string"/>
+<field name="" type="StructureData"/>
+</struct>
+<struct>
+<attribute name="Channel"/>
+<field name="direction" type="string"/>
+<field name="" type="Interface"/>
+</struct>
+<struct>
+<attribute name="Connection"/>
+<field name="in_channel" type="string"/>
+<field name="out_channel" type="string"/>
+<field name="from_component" type="string"/>
+<field name="to_component" type="string"/>
+<field name="from_component_id" type="string"/>
+<field name="to_component_id" type="string"/>
+<field name="" type="StructureData"/>
+</struct>
+<struct>
+<attribute name="InternodeConnection"/>
+<field name="internode" type="string"/>
+<field name="type" type="string"/>
+<field name="direction" type="string"/>
+<field name="" type="StructureData"/>
+</struct>
+<connect/>
+</xsd:schema>

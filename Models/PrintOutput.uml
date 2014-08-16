@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_q-7HIAz5EeSFxvLnTGWyDw" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_q-7HIQz5EeSFxvLnTGWyDw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_rBKi0Az5EeSFxvLnTGWyDw" name="PrintOutput">
+    <region xmi:type="uml:Region" xmi:id="_rBbBgAz5EeSFxvLnTGWyDw" name="Region0">
+      <transition xmi:type="uml:Transition" xmi:id="_wqVKwAz5EeSFxvLnTGWyDw" name="receive from input" source="_t6ZZwAz5EeSFxvLnTGWyDw" target="_vo9NUAz5EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_O1zq4Az6EeSFxvLnTGWyDw" name="assign from cycle+1" source="_pYSRIBv6EeSAZcAip4hyTA" target="_NJhvQAz6EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_YLyi0Az6EeSFxvLnTGWyDw" name="Transition0" source="_NJhvQAz6EeSFxvLnTGWyDw" target="_XuVx0Az6EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_Cgh9YBv6EeSAZcAip4hyTA" name="print string" source="_vo9NUAz5EeSFxvLnTGWyDw" target="_8fMtEBv5EeSAZcAip4hyTA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_HoEe8Bv6EeSAZcAip4hyTA" name="print Int" source="_8fMtEBv5EeSAZcAip4hyTA" target="_12EP0Az5EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_LxwRIBv6EeSAZcAip4hyTA" name="print string" source="_12EP0Az5EeSFxvLnTGWyDw" target="_JyqHMBv6EeSAZcAip4hyTA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_OCm5cBv6EeSAZcAip4hyTA" name="print Int" source="_JyqHMBv6EeSAZcAip4hyTA" target="_5ut8YAz5EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_TSfesBv6EeSAZcAip4hyTA" name="print string" source="_5ut8YAz5EeSFxvLnTGWyDw" target="_QiW5YBv6EeSAZcAip4hyTA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_VZxUQBv6EeSAZcAip4hyTA" name="print Int" source="_QiW5YBv6EeSAZcAip4hyTA" target="__p0B0Az5EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_da88cBv6EeSAZcAip4hyTA" name="print string" source="__p0B0Az5EeSFxvLnTGWyDw" target="_XP8ywBv6EeSAZcAip4hyTA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_fqdg8Bv6EeSAZcAip4hyTA" name="print Int" source="_XP8ywBv6EeSAZcAip4hyTA" target="_EhxPQAz6EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_kd4zsBv6EeSAZcAip4hyTA" name="print string" source="_EhxPQAz6EeSFxvLnTGWyDw" target="_hkgLwBv6EeSAZcAip4hyTA"/>
+      <transition xmi:type="uml:Transition" xmi:id="_mykzIBv6EeSAZcAip4hyTA" name="print Int" source="_hkgLwBv6EeSAZcAip4hyTA" target="_IyXhwAz6EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_uUzOcBv6EeSAZcAip4hyTA" name="print integer" source="_IyXhwAz6EeSFxvLnTGWyDw" target="_pYSRIBv6EeSAZcAip4hyTA"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_t6ZZwAz5EeSFxvLnTGWyDw" name="Initial0"/>
+      <subvertex xmi:type="uml:State" xmi:id="_vo9NUAz5EeSFxvLnTGWyDw" name="reading has been set "/>
+      <subvertex xmi:type="uml:State" xmi:id="_12EP0Az5EeSFxvLnTGWyDw" name="cycle"/>
+      <subvertex xmi:type="uml:State" xmi:id="_5ut8YAz5EeSFxvLnTGWyDw" name="reading.photo"/>
+      <subvertex xmi:type="uml:State" xmi:id="__p0B0Az5EeSFxvLnTGWyDw" name="reading.solar"/>
+      <subvertex xmi:type="uml:State" xmi:id="_EhxPQAz6EeSFxvLnTGWyDw" name="reading.temp"/>
+      <subvertex xmi:type="uml:State" xmi:id="_IyXhwAz6EeSFxvLnTGWyDw" name="reading.humid">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_LMFLIAz6EeSFxvLnTGWyDw">
+          <body>reading.humid</body>
+        </ownedComment>
+      </subvertex>
+      <subvertex xmi:type="uml:State" xmi:id="_NJhvQAz6EeSFxvLnTGWyDw" name="cycle increments by 1"/>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_XuVx0Az6EeSFxvLnTGWyDw" name="FinalState0"/>
+      <subvertex xmi:type="uml:State" xmi:id="_8fMtEBv5EeSAZcAip4hyTA" name="&quot;Cycle &quot;"/>
+      <subvertex xmi:type="uml:State" xmi:id="_JyqHMBv6EeSAZcAip4hyTA" name="&quot;:\tphoto = &quot;"/>
+      <subvertex xmi:type="uml:State" xmi:id="_QiW5YBv6EeSAZcAip4hyTA" name="&quot;\tsolar = &quot;"/>
+      <subvertex xmi:type="uml:State" xmi:id="_XP8ywBv6EeSAZcAip4hyTA" name="&quot;\ttemp = &quot;"/>
+      <subvertex xmi:type="uml:State" xmi:id="_hkgLwBv6EeSAZcAip4hyTA" name="&quot;\thumid = &quot;"/>
+      <subvertex xmi:type="uml:State" xmi:id="_pYSRIBv6EeSAZcAip4hyTA" name="&quot;\n&quot;"/>
+    </region>
+  </packagedElement>
+</uml:Model>

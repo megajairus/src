@@ -153,7 +153,7 @@ public class StateMachineValidation {
 		for(int i =0; i < transitions.getLength(); i++){
 			Element line = (Element) transitions.item(i);
 			if(line.getAttribute(SOURCE).equals(currant_state.getAttribute(XMI_ID))){
-				if (!line.getAttribute("name").equals("then") &&  !line.getAttribute("name").equals("else")){
+				if (!currant_state.getAttribute("kind").equals("fork")){
 					counter++;
 				}
 			}
@@ -175,7 +175,7 @@ public class StateMachineValidation {
 			ErrorMessages.WrongForState(State_name);
 			return false;
 		}
-		String [] limit_list = state_list[1].split("=");
+		String [] limit_list = state_list[0].split("=");
 		if(limit_list.length < 2){
 			ErrorMessages.WrongForState(State_name);
 			return false;

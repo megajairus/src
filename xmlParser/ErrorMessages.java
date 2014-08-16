@@ -134,63 +134,116 @@ public class ErrorMessages {
 	public static void WrongReceiveAction(String action_name) {
 		String error_message = "Model Notation Error: in behaviour action <" + action_name +
 				"> needs more information \n" + 
-				"     must follow <receive><from><channel name>[additional information]";
+				"     must follow <receive><from><channel name>[additional information]\n";
 		System.err.println(error_message);
 	}
 
 	public static void WrongVariableState(String state_name) {
 		String error_message = "Model Notation Error: in behaviour state <" + state_name +
 				"> needs more information \n" + 
-				"     must follow <variable>[additional information]";
+				"     must follow <variable>[additional information]\n";
 		System.err.println(error_message);
 	}
 
 	public static void WrongSendAction(String action_name) {
 		String error_message = "Model Notation Error: in behaviour action <" + action_name +
 				"> needs more information \n" + 
-				"     must follow <send><from><channel name>[additional information]";
+				"     must follow <send><from><channel name>[additional information]\n";
 		System.err.println(error_message);
 	}
 
 	public static void WrongAssignAction(String action_name) {
 		String error_message = "Model Notation Error: in behaviour action <" + action_name +
 				"> needs more information \n" + 
-				"     must follow <assign><from>[any]<colon><passing objext>[additional information]";
+				"     must follow <assign><from>[any]<colon><passing objext>[additional information]\n";
 		System.err.println(error_message);
 	}
 
 	public static void WrongAssignColonAction(String action_name) {
 		String error_message = "Model Notation Error: in behaviour action <" + action_name +
 				"> colon used but more information needed \n" + 
-				"     must follow <assign><from>[any]<colon><passing objext>[additional information]";
+				"     must follow <assign><from>[any]<colon><passing objext>[additional information]\n";
 		System.err.println(error_message);
 	}
 
 	public static void WrongNewActionColons(String action_name) {
 		String error_message = "Model Notation Error: in behaviour action <" + action_name +
 				"> needs more information \n" + 
-				"     must follow <new><colon><struct type><colon>[aditional information separated by commons]";
+				"     must follow <new><colon><struct type><colon>[aditional information separated by commons]\n";
 		System.err.println(error_message);
 	}
 
 	public static void WrongPrintAction(String action_name) {
 		String error_message = "Model Notation Error: in behaviour action <" + action_name +
 				"> needs more information \n" + 
-				"     must follow <print><type>";
+				"     must follow <print><type>\n";
 		System.err.println(error_message);
 	}
 
 	public static void WrongIfState(String state_name) {
 		String error_message = "Model Notation Error: in behaviour state <" + state_name +
 				"> if statement needs clause \n" + 
-				"     must follow <if clause>[additional information]";
+				"     must follow <if clause>[additional information]\n";
 		System.err.println(error_message);
 	}
 
 	public static void WrongForState(String state_name) {
 		String error_message = "Model Notation Error: in behaviour state <" + state_name +
 				"> more information needed \n" + 
-				"     must follow <identifier><colon><limit><equal sign><value>[additional information]";
+				"     must follow <identifier><colon><limit><equal sign><value>[additional information]\n";
 		System.err.println(error_message);
 	}
+
+	public static void internodeConnectionNotEnoughInfo(String type) {
+		String error_message = "Model Notation Error: Deployment Channel <" + type + 
+				"> not enough information <" + 
+				"> \n"
+				+ " must foolow <outgoing channel> <colon> <variable type> <colon> <incoming channel>\n";
+		System.err.println(error_message);
+	}
+
+	public static void interNodeConnectionChannelNameEorror(String channel,
+			String instance) {
+		String error_message = "Model Notation Error: deployment channel <" + channel + 
+				"> in the instance <" + instance + 
+				"> is not defined in any component's presented interfaces\n" +
+				"    1) check if presented interfaces have same channel\n" +
+				"    2) check channel spelling in dependence notation\n" +
+				"    3) check channel spelling in interface\n";
+		System.err.println(error_message);
+	}
+
+	public static void internodeConnectionChannelDirectionEorror(
+			String channel, String instance, String direction) {
+			String error_message = "Model Notation Error: deployment channel <" + channel + 
+					"> in the instance <" + instance +
+					"> is looking for direction <" + direction +
+					"> \n is not the right direction in interface definition \n";
+			System.err.println(error_message);
+	}
+
+	public static void instanceUsedMoreThanOnce(String name, int counter) {
+		String error_message = "Model Notation Error: instance name <" + name + 
+				"> used more than once in deployment models <" + 
+				"> \n remove " +  (counter-1) + 
+				" instances in the deployment models\n ";
+		System.err.println(error_message);
+	}
+
+	public static void deploymentInstanceNotDefined(String name) {
+		String error_message = "Model Notation Error: instance name <" + name + 
+				"> is not defined in structure models <" + 
+				" \n remove instance in deployment model or define instance in class model \n";
+		System.err.println(error_message);
+	}
+
+	public static void instanceNotUsed(String name, int counter) {
+		String error_message = "Model Notation Error: instance name <" + name + 
+				"> not defined in deployments, <" + 
+				"> \n will be ignored in programming " +  
+				" \n place instance in deploymen to use in coding\n";
+		System.err.println(error_message);
+	}
+
+	
 }

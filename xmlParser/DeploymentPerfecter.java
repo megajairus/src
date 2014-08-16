@@ -25,13 +25,41 @@ public class DeploymentPerfecter {
 			String in_name = findInstance(temps.get(i).getInId(), deployments.get(in_pack));
 			String out_name = findInstance(temps.get(i).getOutId(), deployments.get(out_pack));
 			Connection connect = findConnection(in_name, out_name, structure.getConnectionList());
-			in_name = deployments.get(in_pack).getName();
-			out_name = deployments.get(out_pack).getName();
+			String in_node = deployments.get(in_pack).getName();
+			String out_node = deployments.get(out_pack).getName();
 			String type = temps.get(i).getType();
-			deployments.get(in_pack).addInter(new InternodeConnection(connect, out_name, type));
-			deployments.get(out_pack).addInter(new InternodeConnection(connect, in_name, type));
-			
+			String [] types = type.split(":");
+			if(connect != null){
+			//if(checkConnection(connect, type)){
+				structure.addInternode(new InternodeConnection(connect, out_node, types[1], "receive"));
+				structure.addInternode(new InternodeConnection(connect, in_node, types[1], "send"));
+			}
+			else{
+				connect = creatNewConnection(type, in_name, out_name);
+				structure.addInternode(new InternodeConnection(connect, out_node, types[1], "receive"));
+				structure.addInternode(new InternodeConnection(connect, in_node, types[1], "send"));
+			}
 		}
+	}
+
+	private static Connection creatNewConnection(String type, String in_name,
+			String out_name) {
+		String [] types = type.split(":");
+		Connection connect = new Connection(types[2],types[0], "" , "",out_name, in_name);
+		return connect;
+	}
+
+	private static boolean checkConnection(Connection connect, String type) {
+		String [] types = type.split(":");
+		System.out.println(types.length );
+		System.out.println(types[0]);
+		System.out.println(connect.getOutChannel());
+		System.out.println(types[2]);
+		System.out.println(connect.getInChannel());
+		if(types[0].equals(connect.getOutChannel()) && types[2].equals(connect.getInChannel())){
+			return true;
+		}
+		return false; 
 	}
 
 	private static int findDeployment(String id,

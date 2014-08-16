@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_VpL70Az9EeSFxvLnTGWyDw" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_VpL70Qz9EeSFxvLnTGWyDw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_VpMi4Az9EeSFxvLnTGWyDw" name="LedOutput">
+    <region xmi:type="uml:Region" xmi:id="_VpNJ8Az9EeSFxvLnTGWyDw" name="model">
+      <transition xmi:type="uml:Transition" xmi:id="_i5fUQAz9EeSFxvLnTGWyDw" name="receive from input" source="_WYFCIAz9EeSFxvLnTGWyDw" target="_YCtX8Az9EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_xihaMAz9EeSFxvLnTGWyDw" name="comment" source="_YCtX8Az9EeSFxvLnTGWyDw" target="_n4qkAAz9EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_0632EAz9EeSFxvLnTGWyDw" name="comment" source="_n4qkAAz9EeSFxvLnTGWyDw" target="_y3ykAAz9EeSFxvLnTGWyDw"/>
+      <transition xmi:type="uml:Transition" xmi:id="_36SNgAz9EeSFxvLnTGWyDw" name="Transition0" source="_y3ykAAz9EeSFxvLnTGWyDw" target="_3crrgAz9EeSFxvLnTGWyDw"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_WYFCIAz9EeSFxvLnTGWyDw" name="Initial0"/>
+      <subvertex xmi:type="uml:State" xmi:id="_YCtX8Az9EeSFxvLnTGWyDw" name="reading has been gathered"/>
+      <subvertex xmi:type="uml:State" xmi:id="_n4qkAAz9EeSFxvLnTGWyDw" name="set LEDs, R/G/B for high temp/humidity/light"/>
+      <subvertex xmi:type="uml:State" xmi:id="_y3ykAAz9EeSFxvLnTGWyDw" name="set averages"/>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_3crrgAz9EeSFxvLnTGWyDw" name="FinalState0"/>
+    </region>
+  </packagedElement>
+</uml:Model>

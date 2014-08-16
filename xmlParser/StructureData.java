@@ -8,6 +8,7 @@ import structuralModels.Component;
 import structuralModels.ComponentInstance;
 import structuralModels.Connection;
 import structuralModels.Interface;
+import structuralModels.InternodeConnection;
 import structuralModels.Struct;
 
 public class StructureData {
@@ -17,6 +18,9 @@ public class StructureData {
 	private ArrayList<Connection> connection_list;
 	private ArrayList<ComponentInstance> instance_list;
 	private ArrayList<Associate> associate_list;
+	private ArrayList<InternodeConnection> node_list;
+	private String node_name;
+	private int order_number;
 	public StructureData(){
 		 component_list = new ArrayList<Component>();
 		 interface_list = new ArrayList<Interface>();
@@ -24,8 +28,14 @@ public class StructureData {
 		 connection_list = new ArrayList<Connection>();
 		 instance_list = new ArrayList<ComponentInstance>();
 		 associate_list = new ArrayList<Associate>();
+		 node_list = new ArrayList<InternodeConnection>();
+		 node_name = "file";
+		 order_number = 1;
 	}
 	
+	public void addInternode(InternodeConnection node){
+		node_list.add(node);
+	}
 	public void addAssociate(Associate associate){
 		associate_list.add(associate);
 	}
@@ -95,6 +105,14 @@ public class StructureData {
 		return connection_list.size();
 	}
 	
+	public int interNodeSize(){
+		return node_list.size();
+	}
+	
+	public InternodeConnection getInterNode(int index){
+		return node_list.get(index);
+	}
+	
 	public boolean componentExists(String name){
 		for (int i =0 ; i < component_list.size(); i++){
 			if(name.equals(component_list.get(i).getName())){
@@ -143,6 +161,58 @@ public class StructureData {
 
 	public ArrayList<Associate> getAssociateList() {
 		return associate_list;
+	}
+
+	public ArrayList<InternodeConnection> getInterNodeList() {
+		return node_list;
+	}
+
+	public void setInterNodeList(ArrayList<InternodeConnection> inter_list) {
+		this.node_list = inter_list;
+	}
+
+	public String getNodeName() {
+		return node_name;
+	}
+
+	public void setNodeName(String node_name) {
+		this.node_name = node_name;
+	}
+
+	public boolean structExists(String name) {
+		for (int i =0 ; i < struct_list.size(); i++){
+			if(name.equals(struct_list.get(i).getName())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean interfaceExists(String name) {
+		for (int i =0 ; i < interface_list.size(); i++){
+			if(name.equals(interface_list.get(i).getName())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean connectionExistsByName(String from_name, String to_name) {
+		for (int i =0 ; i < connection_list.size(); i++){
+			if(from_name.equals(connection_list.get(i).getFromComponent())){
+				if(to_name.equals(connection_list.get(i).getToComponent()))
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public int getOrderNumber() {
+		return order_number;
+	}
+
+	public void setOrderNumber(int order_number) {
+		this.order_number = order_number;
 	}
 	
 

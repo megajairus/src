@@ -28,6 +28,7 @@ public class ModelAnalyser {
 	public static void main(String argv[]) throws ParserConfigurationException{
 		boolean model_excepted;
 		File folder = OpenFolder.pickFolderPath();
+		setName(folder);
 		ArrayList<Document> docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_CLASS_DIAGRAM);
 		model_excepted = StructureExtractor.loadDateFields(docs, structure);
 		if (!model_excepted){
@@ -51,15 +52,33 @@ public class ModelAnalyser {
 			ErrorMessages.cannotContinue();
 			return;
 		}
-		//docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_DEPLOYMENT_DIAGRAM);
-		//model_excepted = DeploymentExtractor.loadDateFields(docs, deployments, temps);
-		//if (!model_excepted){
-		//	ErrorMessages.cannotContinue();
-		//	return;
-		//}
+		docs = ReadXMLFiles.readFile(folder, PAPYRUS_UML_DEPLOYMENT_DIAGRAM);
+		model_excepted = DeploymentExtractor.loadDateFields(docs, deployments, temps);
+		if (!model_excepted){
+			ErrorMessages.cannotContinue();
+			return;
+		}
 		DeploymentPerfecter.finishPackageDate(structure, deployments, temps);
-		WriteXMLFile.createIntermediateLanguage(structure, component_behaviour);
+		
+		if(deployments.size() > 0){
+			model_excepted = DeploymentValidation.validateDeploymentNotation(structure, deployments);
+			if(!model_excepted){
+				ErrorMessages.cannotContinue();
+				return;
+			}
+			DeploymentDivision.writeNodes(structure,deployments, component_behaviour);
+		}
+		else{
+			WriteXMLFile.createIntermediateLanguage(structure, component_behaviour, 1);
+		}
 		System.out.println("----------------------------");
+	}
+
+	private static void setName(File folder) {
+		String path = folder.getPath();
+		String[] folder_names = path.split("\\\\");
+		int length = folder_names.length - 1;
+		structure.setNodeName(folder_names[length]);
 	}
 	
 	

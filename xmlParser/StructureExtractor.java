@@ -36,6 +36,7 @@ public class StructureExtractor {
 	private static final String INTERFACE_REALIZATION = "interfaceRealization";
 	private static final String XMI_ID = "xmi:id";
 	private static final String ATTRIBUTE = "ownedAttribute";
+	private static final String OPERATION = "ownedOperation";
 	private static final String UML_CONNECTION = "uml:Dependency";
 	private static final String UML_COMPONENT = "uml:Component";
 	private static final String UML_INTERFACE = "uml:Interface";
@@ -173,6 +174,8 @@ public class StructureExtractor {
 			return new Variable(name, type, true);
 		}
 	}
+	
+	
 
 
 	private static String translateType(Element e_type) {
@@ -238,8 +241,16 @@ public class StructureExtractor {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
 				Element element = (Element) node;
 				if (element.getAttribute(XMI_TYPE).equals(UML_PROPERTY)){
-					variables.add(parsePropertyType(element));
+					variables.add(parsePropertyTypeForComponent(element));
 				}
+			}
+		
+		}
+		NodeList operations = component.getElementsByTagName(OPERATION);
+		for (int i = 0; i < operations.getLength(); i++) {
+			Node node = operations.item(i);
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				Element element = (Element) node;
 				if (element.getAttribute(XMI_TYPE).equals(UML_OPERATION)){
 					procedures.add(parseProcedure(element));
 				}
@@ -258,13 +269,36 @@ public class StructureExtractor {
 	}
 
 
+	private static Variable parsePropertyTypeForComponent(Element element) {
+			String name, type;
+			name = element.getAttribute("name");
+			type = element.getAttribute("type");
+			if(type.isEmpty()){
+				NodeList attributes = element.getElementsByTagName("type");
+				if (attributes.getLength() > 0){
+					Element e_type = (Element) attributes.item(0);
+					type = "";
+					return new Variable(name, type, false);
+				}
+				else{
+					return new Variable(name, "any", false);
+				}
+			}
+			else{
+				
+				return new Variable(name, type, true);
+			}
+		}
+	
+
+
 	private static Procedure parseProcedure(Element element) {
 		ArrayList<Variable> variables = new ArrayList<Variable>();
 		Variable returnType = null;
 		NodeList nodes = element.getElementsByTagName(OWNED_PARAMETER);
 		for(int i = 0; i < nodes.getLength(); i++){
 			Element parameter = (Element) nodes.item(i);
-			if (parameter.getAttribute(DIRECTION).equals("return")){
+			if (parameter.getAttribute(DIRECTION).equals("out")){
 				returnType = parsePropertyType(parameter);
 			}
 			else{

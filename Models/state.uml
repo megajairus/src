@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_P2mGoAxDEeSuIJcy91AVRQ" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_P2mGoQxDEeSuIJcy91AVRQ">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_P29TAAxDEeSuIJcy91AVRQ" name="SensorReader">
+    <region xmi:type="uml:Region" xmi:id="_P29TAQxDEeSuIJcy91AVRQ" name="end if">
+      <transition xmi:type="uml:Transition" xmi:id="_AgXRkAxFEeSuIJcy91AVRQ" name="assign from photoReading()" source="_QwN2QAxDEeSuIJcy91AVRQ" target="_AB07cAxFEeSuIJcy91AVRQ"/>
+      <transition xmi:type="uml:Transition" xmi:id="_FPvKwAxFEeSuIJcy91AVRQ" name="assign from solarReading()" source="_AB07cAxFEeSuIJcy91AVRQ" target="_EyXSQAxFEeSuIJcy91AVRQ"/>
+      <transition xmi:type="uml:Transition" xmi:id="_J93t0AxFEeSuIJcy91AVRQ" name="assign from tempCelsiusReading()" source="_EyXSQAxFEeSuIJcy91AVRQ" target="_Jai-UAxFEeSuIJcy91AVRQ"/>
+      <transition xmi:type="uml:Transition" xmi:id="_YNkGsAxFEeSuIJcy91AVRQ" name="assign from relHumidReading()" source="_Jai-UAxFEeSuIJcy91AVRQ" target="_TGp3QAxFEeSuIJcy91AVRQ"/>
+      <transition xmi:type="uml:Transition" xmi:id="_j7fGYAxFEeSuIJcy91AVRQ" name="new : SensorReading: photoValue, solarValue, tempValue, humidityValuereading" source="_TGp3QAxFEeSuIJcy91AVRQ" target="_c8hwMAxFEeSuIJcy91AVRQ"/>
+      <transition xmi:type="uml:Transition" xmi:id="_0871MAxFEeSuIJcy91AVRQ" name="send to ledsChan" source="_c8hwMAxFEeSuIJcy91AVRQ" target="_yStqoAxFEeSuIJcy91AVRQ"/>
+      <transition xmi:type="uml:Transition" xmi:id="_45BQQAxFEeSuIJcy91AVRQ" name="send to printChan" source="_yStqoAxFEeSuIJcy91AVRQ" target="_2d5RoAxFEeSuIJcy91AVRQ"/>
+      <transition xmi:type="uml:Transition" xmi:id="_NUblgBEdEeSIGZbCKOwxTQ" name="receive from ticks" source="_MrZ2oBEdEeSIGZbCKOwxTQ" target="_QwN2QAxDEeSuIJcy91AVRQ"/>
+      <transition xmi:type="uml:Transition" xmi:id="_6Veq4BmxEeSTwMeY_VGEDA" name="Transition0" source="_2d5RoAxFEeSuIJcy91AVRQ" target="_4IG0YBmxEeSTwMeY_VGEDA"/>
+      <subvertex xmi:type="uml:State" xmi:id="_QwN2QAxDEeSuIJcy91AVRQ" name="tick is gathered from the clock"/>
+      <subvertex xmi:type="uml:State" xmi:id="_AB07cAxFEeSuIJcy91AVRQ" name="photoValue has been assigned "/>
+      <subvertex xmi:type="uml:State" xmi:id="_EyXSQAxFEeSuIJcy91AVRQ" name="solarValue as been assinged a value"/>
+      <subvertex xmi:type="uml:State" xmi:id="_Jai-UAxFEeSuIJcy91AVRQ" name="tempValue is assigned"/>
+      <subvertex xmi:type="uml:State" xmi:id="_TGp3QAxFEeSuIJcy91AVRQ" name="humdityValue is now defined"/>
+      <subvertex xmi:type="uml:State" xmi:id="_c8hwMAxFEeSuIJcy91AVRQ" name="reading is a new photoReading">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_lSnrkBKfEeStS7HrE6A8nA">
+          <body>reading is a new photoReading</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_lmozwBKfEeStS7HrE6A8nA">
+          <body>reading is a new photoReading</body>
+        </ownedComment>
+      </subvertex>
+      <subvertex xmi:type="uml:State" xmi:id="_yStqoAxFEeSuIJcy91AVRQ" name="reading has been sent out "/>
+      <subvertex xmi:type="uml:State" xmi:id="_2d5RoAxFEeSuIJcy91AVRQ" name="reading has been sent "/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_MrZ2oBEdEeSIGZbCKOwxTQ" name="Initial0"/>
+      <subvertex xmi:type="uml:FinalState" xmi:id="_4IG0YBmxEeSTwMeY_VGEDA" name="FinalState0"/>
+    </region>
+  </packagedElement>
+</uml:Model>

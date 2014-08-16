@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_OH7fMBiVEeScbZoEWBTHTw" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_OH7fMRiVEeScbZoEWBTHTw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Node" xmi:id="_KBblEBivEeScbZoEWBTHTw" name="Node1">
+    <nestedClassifier xmi:type="uml:Artifact" xmi:id="_MoPPQBivEeScbZoEWBTHTw" clientDependency="_-XQLABiwEeScbZoEWBTHTw _I1AVcBo0EeSs367FJZYjLQ" name="sr" fileName="Artifact1.file"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Node" xmi:id="_RxtDcBivEeScbZoEWBTHTw" name="Node2">
+    <nestedClassifier xmi:type="uml:Artifact" xmi:id="_UIi_ABivEeScbZoEWBTHTw" name="lo" fileName="lo"/>
+    <nestedClassifier xmi:type="uml:Artifact" xmi:id="_UYe4cBivEeScbZoEWBTHTw" name="po" fileName="Artifact2.file"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_-XQLABiwEeScbZoEWBTHTw" name="ledsChan:sensorReading:input" client="_MoPPQBivEeScbZoEWBTHTw" supplier="_UIi_ABivEeScbZoEWBTHTw"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_I1AVcBo0EeSs367FJZYjLQ" name="printChan:sensorReading:input" client="_MoPPQBivEeScbZoEWBTHTw" supplier="_UYe4cBivEeScbZoEWBTHTw"/>
+</uml:Model>

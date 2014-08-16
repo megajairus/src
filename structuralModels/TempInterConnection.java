@@ -6,7 +6,9 @@ public class TempInterConnection {
 	private String out_id;
 	
 	public TempInterConnection(String type, String in_id, String out_id){
-		
+		this.type = type;
+		this.in_id = in_id;
+		this.out_id = out_id;
 	}
 
 	public String getType() {

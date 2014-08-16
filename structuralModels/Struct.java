@@ -12,8 +12,10 @@ public class Struct {
 		this.variables = variables;
 	}
 	
-	
-	public void addVaiable(String name, String type, Boolean pointer){
+	public ArrayList<Variable> getVariables(){
+		return variables;
+	}
+	public void addVariable(String name, String type, Boolean pointer){
 		variables.add(new Variable(name, type, pointer));
 	}
 	

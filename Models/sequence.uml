@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_70OtUAbYEeSHepmsrcFl-w" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_70OtUQbYEeSHepmsrcFl-w">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_70PUYAbYEeSHepmsrcFl-w" name="Interaction1">
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_DIYYgAdqEeSrzJQ8MNcGFQ" name="MessageSend" covered="_-FwrEAbYEeSHepmsrcFl-w" message="_DIMyUAdqEeSrzJQ8MNcGFQ"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_DIY_kAdqEeSrzJQ8MNcGFQ" name="ticks" covered="_uoZGQAdpEeSrzJQ8MNcGFQ" message="_DIMyUAdqEeSrzJQ8MNcGFQ"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_F8b0gAdqEeSrzJQ8MNcGFQ" name="ledsChan" covered="_uoZGQAdpEeSrzJQ8MNcGFQ" message="_F8bNcAdqEeSrzJQ8MNcGFQ"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_F8dCoAdqEeSrzJQ8MNcGFQ" name="input" covered="_vYaN8AdpEeSrzJQ8MNcGFQ" message="_F8bNcAdqEeSrzJQ8MNcGFQ"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_RgSSMAdqEeSrzJQ8MNcGFQ" name="printChan" covered="_uoZGQAdpEeSrzJQ8MNcGFQ" message="_RgRrIAdqEeSrzJQ8MNcGFQ"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_RgSSMQdqEeSrzJQ8MNcGFQ" name="input" covered="_vG0usAdpEeSrzJQ8MNcGFQ" message="_RgRrIAdqEeSrzJQ8MNcGFQ"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_-FwrEAbYEeSHepmsrcFl-w" name="timer" coveredBy="_DIYYgAdqEeSrzJQ8MNcGFQ"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_uoZGQAdpEeSrzJQ8MNcGFQ" name="sr" coveredBy="_DIY_kAdqEeSrzJQ8MNcGFQ _F8b0gAdqEeSrzJQ8MNcGFQ _RgSSMAdqEeSrzJQ8MNcGFQ"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_vG0usAdpEeSrzJQ8MNcGFQ" name="po" coveredBy="_RgSSMQdqEeSrzJQ8MNcGFQ"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_vYaN8AdpEeSrzJQ8MNcGFQ" name="lo" coveredBy="_F8dCoAdqEeSrzJQ8MNcGFQ"/>
+    <message xmi:type="uml:Message" xmi:id="_DIMyUAdqEeSrzJQ8MNcGFQ" name="tick" messageSort="asynchCall" receiveEvent="_DIY_kAdqEeSrzJQ8MNcGFQ" sendEvent="_DIYYgAdqEeSrzJQ8MNcGFQ"/>
+    <message xmi:type="uml:Message" xmi:id="_F8bNcAdqEeSrzJQ8MNcGFQ" name="reading" messageSort="asynchCall" receiveEvent="_F8dCoAdqEeSrzJQ8MNcGFQ" sendEvent="_F8b0gAdqEeSrzJQ8MNcGFQ"/>
+    <message xmi:type="uml:Message" xmi:id="_RgRrIAdqEeSrzJQ8MNcGFQ" name="reading" messageSort="asynchCall" receiveEvent="_RgSSMQdqEeSrzJQ8MNcGFQ" sendEvent="_RgSSMAdqEeSrzJQ8MNcGFQ"/>
+  </packagedElement>
+</uml:Model>

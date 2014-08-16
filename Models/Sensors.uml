@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_YEcdUPl1EeOc-uFTjoKavw" name="houdek">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_YEcdUfl1EeOc-uFTjoKavw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Component" xmi:id="_Y6LygPl1EeOc-uFTjoKavw" clientDependency="_2-H08ACAEeSG-t0fd_5beg" name="SensorReader">
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_2-H08ACAEeSG-t0fd_5beg" name="InterfaceRealization1" client="_Y6LygPl1EeOc-uFTjoKavw" supplier="_aB-BAPrVEeOv-ZYamP_uJw" contract="_aB-BAPrVEeOv-ZYamP_uJw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_I94f0PrTEeOv-ZYamP_uJw" clientDependency="_4b-TAACAEeSG-t0fd_5beg" name="PrintOutput ">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_WuFD0PrUEeOv-ZYamP_uJw" name="cycle = 0" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XFbM0PrUEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XFbz4PrUEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_XFdCAPrUEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_4b-TAACAEeSG-t0fd_5beg" name="InterfaceRealization1" client="_I94f0PrTEeOv-ZYamP_uJw" supplier="_pf4ggPrVEeOv-ZYamP_uJw" contract="_pf4ggPrVEeOv-ZYamP_uJw"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_mnPOEB10EeSq5uI7-4DOUQ" name="getJairus">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_uMHUwB10EeSq5uI7-4DOUQ" name="" direction="out">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_xKmfIB10EeSq5uI7-4DOUQ" name="input">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_8rtuIPrTEeOv-ZYamP_uJw" name="printChan : input" client="_Prdk4Ag2EeSzOdiOpGWAfQ" supplier="_ZnYzwAqtEeSuIJcy91AVRQ"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_h87h4PrUEeOv-ZYamP_uJw" clientDependency="_1lktoACAEeSG-t0fd_5beg" name="LedOutput ">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_kd5CwPrUEeOv-ZYamP_uJw">
+      <body>LedOutput </body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_k1wJIPrUEeOv-ZYamP_uJw">
+      <body>LedOutput </body>
+    </ownedComment>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_r_UM0PrUEeOv-ZYamP_uJw" name="avgTemp = 0.0" visibility="private" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_sPzf4PrUEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_sP0uAPrUEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_sP18IPrUEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_yeVesPrUEeOv-ZYamP_uJw" name="avgSolar = 0" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yylQYPrUEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yymegPrUEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_yyoTsPrUEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_2aE7gPrUEeOv-ZYamP_uJw" name="avgHumid = 0.0" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2pScMPrUEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2pTqUPrUEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_2pU4cPrUEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_1lktoACAEeSG-t0fd_5beg" name="InterfaceRealization1" client="_h87h4PrUEeOv-ZYamP_uJw" supplier="_u2LPwPrVEeOv-ZYamP_uJw" contract="_u2LPwPrVEeOv-ZYamP_uJw"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_oThSkBm3EeSTwMeY_VGEDA" name="jairus">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_F02VgCRYEeSr2YIkgApkag" name="return" type="_EG-JUPrVEeOv-ZYamP_uJw" direction="out"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_SnpSkCRYEeSr2YIkgApkag" name="temp">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y2pLcCRYEeSr2YIkgApkag" name="reading" type="_EG-JUPrVEeOv-ZYamP_uJw"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_7Ly-EPrUEeOv-ZYamP_uJw" name="ledsChan : input" client="_Prdk4Ag2EeSzOdiOpGWAfQ" supplier="_Jcf5gAqtEeSuIJcy91AVRQ"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_EG-JUPrVEeOv-ZYamP_uJw" name="sensorReading ">
+    <elementImport xmi:type="uml:ElementImport" xmi:id="_qcjD4AaYEeSiX6ECk5DVHQ" alias="standardOut"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_K3I1kPrVEeOv-ZYamP_uJw" name="photo" visibility="private" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LMYs0PrVEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LMZ68PrVEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_LMbJEPrVEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_OKy-sPrVEeOv-ZYamP_uJw" name="solar" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_OZQRcPrVEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OZRfkPrVEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_OZStsPrVEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Q5CGkPrVEeOv-ZYamP_uJw" name="temp" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_RGwZgPrVEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RGxnoPrVEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_RGy1wPrVEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_WTmR0PrVEeOv-ZYamP_uJw" name="humid" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_WZ5uIPrVEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_WZ6VMPrVEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_WZ68QPrVEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_aB-BAPrVEeOv-ZYamP_uJw" name="ISensorReader ">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_bnnwMPrVEeOv-ZYamP_uJw">
+      <body>ISensorReader </body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_b0-PsPrVEeOv-ZYamP_uJw">
+      <body>ISensorReader </body>
+    </ownedComment>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ecwKQPrVEeOv-ZYamP_uJw" name="ticks : in" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fGg48PrVEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fGhgAPrVEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_fGiuIPrVEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_itWcwPrVEeOv-ZYamP_uJw" name="printChan : out" visibility="public" type="_EG-JUPrVEeOv-ZYamP_uJw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_i-pBEPrVEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_i-poIPrVEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_i-q2QPrVEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_lqimoPrVEeOv-ZYamP_uJw" name="ledsChan : out" visibility="public" type="_EG-JUPrVEeOv-ZYamP_uJw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_l5HOIPrVEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_l5H1MPrVEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_l5JDUPrVEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_pf4ggPrVEeOv-ZYamP_uJw" name="IPrintOutput ">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_ruu9sPrVEeOv-ZYamP_uJw">
+      <body>in sensorReading input</body>
+    </ownedComment>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_sG60MPrVEeOv-ZYamP_uJw" name="input:in" visibility="public" type="_EG-JUPrVEeOv-ZYamP_uJw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_sYtu0PrVEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_sYu88PrVEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_sYwLEPrVEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_u2LPwPrVEeOv-ZYamP_uJw" name="ILedOutput ">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_w8L6APrVEeOv-ZYamP_uJw" name=" input : in" visibility="public" type="_EG-JUPrVEeOv-ZYamP_uJw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xIbmQPrVEeOv-ZYamP_uJw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xIcNUPrVEeOv-ZYamP_uJw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_xIdbcPrVEeOv-ZYamP_uJw">
+        <value xsi:nil="true"/>
+      </defaultValue>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_Prdk4Ag2EeSzOdiOpGWAfQ" clientDependency="_8rtuIPrTEeOv-ZYamP_uJw _7Ly-EPrUEeOv-ZYamP_uJw" name="sr" classifier="_Y6LygPl1EeOc-uFTjoKavw"/>
+  <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_Jcf5gAqtEeSuIJcy91AVRQ" name="lo" classifier="_h87h4PrUEeOv-ZYamP_uJw"/>
+  <packagedElement xmi:type="uml:InstanceSpecification" xmi:id="_ZnYzwAqtEeSuIJcy91AVRQ" name="po" classifier="_I94f0PrTEeOv-ZYamP_uJw"/>
+</uml:Model>
